@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node server.js",
+    "dev": "tsx watch server.js",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js",
+    "start": "NODE_ENV=production tsx server.js",
     "lint": "next lint"
   },
   "dependencies": {
@@ -25,6 +25,7 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.14",
+    "tsx": "^4.19.1",
     "typescript": "^5"
   },
   "engines": {
