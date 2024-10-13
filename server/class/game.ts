@@ -39,6 +39,17 @@ class Game {
       .flat();
 
     this.cards = shuffle(unShuffledCards);
+
+    for (const player of this.players) {
+      const INITIAL_CARD_COUNT_PER_USER = 6;
+
+      this.cards
+        .splice(-INITIAL_CARD_COUNT_PER_USER, INITIAL_CARD_COUNT_PER_USER)
+        .forEach((card) => {
+          player.onCardDraw(card);
+        });
+    }
+
     this.getCurrentPlayer().startTurn();
   }
 
