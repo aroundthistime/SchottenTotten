@@ -1,3 +1,6 @@
+import { Socket } from "socket.io";
+import Game from "./server/class/game";
+
 const { createServer } = require("node:http");
 const next = require("next");
 const { Server } = require("socket.io");
@@ -9,14 +12,21 @@ const port = 3000;
 const app = next({ dev, hostname, port });
 const handler = app.getRequestHandler();
 
+let waitingUserSocket: Socket | null = null;
+
 app.prepare().then(() => {
   const httpServer = createServer(handler);
 
   const io = new Server(httpServer);
+  Game.setIo(io);
 
   io.on("connection", (socket) => {
-    console.log(`Connected user: ${socket.id} ${socket.client.request.url}`);
-
+    if (waitingUserSocket) {
+      const game = new Game([socket, waitingUserSocket]);
+      waitingUserSocket = null;
+    } else {
+      waitingUserSocket = socket;
+    }
   });
 
   httpServer
