@@ -1,7 +1,5 @@
 import { Card, CardColor } from "@/types/card";
-import { Range, Tuple } from "@/types/utils";
 import { shuffle } from "@/utils/array";
-import Target from "@/utils/gameObjects/target";
 import { range } from "@/utils/range";
 import { randomUUID } from "crypto";
 import { Server, Socket } from "socket.io";
